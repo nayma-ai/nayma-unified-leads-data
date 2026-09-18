@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INBX Leads — Dashboard</title>
+  <meta name="description" content="INBX leads data and analytics dashboard." />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">◈</span>
+      <div>
+        <h1>INBX Leads</h1>
+        <p>Data &amp; analytics</p>
+      </div>
+    </div>
+    <button id="loadBtn" class="primary" type="button">Refresh</button>
+  </header>
+
+  <main class="container">
+    <div id="status" class="status idle">Loading leads…</div>
+
+    <!-- KPIs -->
+    <section class="kpis">
+      <div class="card kpi"><div class="kpi-label">Total leads</div><div class="kpi-value" id="kpiTotal">—</div></div>
+      <div class="card kpi"><div class="kpi-label">Cities</div><div class="kpi-value" id="kpiCities">—</div></div>
+      <div class="card kpi"><div class="kpi-label">Categories</div><div class="kpi-value" id="kpiCategories">—</div></div>
+      <div class="card kpi"><div class="kpi-label">Top city</div><div class="kpi-value small" id="kpiTopCity">—</div></div>
+    </section>
+
+    <!-- Charts -->
+    <section class="card">
+      <div class="section-head">
+        <h2>Analytics</h2>
+        <span class="muted" id="analyticsMeta">No data loaded</span>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-box"><h3>Leads by city</h3><canvas id="chartCity"></canvas></div>
+        <div class="chart-box"><h3>Leads by date</h3><canvas id="chartDate"></canvas></div>
+      </div>
+    </section>
+
+    <!-- Data table -->
+    <section class="card">
+      <div class="section-head wrap">
+        <h2>Leads <span class="count-pill" id="countPill">0</span></h2>
+        <div class="table-controls">
+          <input id="search" type="search" placeholder="Search name, email, phone, org…" />
+          <select id="filterCity"><option value="">All cities</option></select>
+          <select id="filterRole"><option value="">All roles</option></select>
+          <button id="exportBtn" type="button">Export CSV</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Contact</th><th>City</th><th>Organization</th>
+              <th>Category</th><th>Role</th><th>Looking for</th><th>Captured</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr class="empty-row"><td colspan="8">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="footer muted">INBX leads dashboard</footer>
+  </main>
+
+  <script src="./api.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
